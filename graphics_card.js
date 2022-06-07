@@ -12,11 +12,8 @@ axios.get(url)
       const $ = cheerio.load(html); 
       //console.log($('.goods_name').text())
       let cardsArr = $('.goods_name').text().split(" Graphics Card")
-      let cardsImg = $('image/jpeg').text()
-      
       cardsArr.pop()
       console.log(cardsArr)
-      console.log(cardsImg)
 }});
 
 
