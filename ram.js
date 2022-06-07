@@ -26,8 +26,9 @@ axios.get(url)
             return [ram, "DDR4"]
         } else if (ram.includes("DDR5")) {
             return [ram, "DDR5"]
-        } 
-        // else {
-        //     return [null, null]
-        // }
+        } else if (ram.includes("DDR3")) {
+            return [ram, "DDR3"]
+        } else {
+            return [null, null]
+        }
     }
