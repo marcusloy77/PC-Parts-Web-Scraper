@@ -23,5 +23,4 @@ cardsArr = axios.get(url)
         return db
           .query(sql, [card])
       })
-
 }});
