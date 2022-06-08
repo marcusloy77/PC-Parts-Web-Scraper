@@ -29,7 +29,7 @@ function motherboardParser(motherboard) {
 }
 
 let url = 'https://www.umart.com.au/pc-parts/computer-parts/motherboards-104';
-cardsArr = axios.get(url)
+axios.get(url)
   .then((response) => {
       if(response.status === 200) {
       const html = response.data;

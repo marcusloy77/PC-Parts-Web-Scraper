@@ -43,7 +43,7 @@ function psuPowerParser(psu) {
 
 
 let url = 'https://www.umart.com.au/pc-parts/computer-parts/power-supply-psu-140';
-cardsArr = axios.get(url)
+axios.get(url)
   .then((response) => {
       if(response.status === 200) {
       const html = response.data;

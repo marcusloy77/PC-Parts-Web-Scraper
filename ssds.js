@@ -6,7 +6,7 @@ const db = require('./db/db');
   // const args = process.argv.slice(2);
   // const postCode = args[0] || 2000;
 let url = 'https://www.umart.com.au/pc-parts/storage-devices/ssd-hard-drives-580';
-cardsArr = axios.get(url)
+axios.get(url)
   .then((response) => {
       if(response.status === 200) {
       const html = response.data;
