@@ -1,5 +1,6 @@
 const axios = require('axios')
 const cheerio = require('cheerio')
+const db = require('./db/db');
 
 let url = 'https://www.umart.com.au/pc-parts/computer-parts/memory-ram-108'
 
@@ -18,6 +19,14 @@ axios.get(url)
 
         const parsedRam = ramArr.map(ram => ramParser(ram))
         console.log(parsedRam)
+        parsedRam.forEach(ram => {
+            const sql = `
+            INSERT INTO ram(name, type)
+            VALUES($1, $2)
+            `
+            return db
+              .query(sql, ram)
+          })
       }
     })
 

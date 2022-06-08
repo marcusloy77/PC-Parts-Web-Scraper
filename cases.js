@@ -12,17 +12,17 @@ cardsArr = axios.get(url)
       const html = response.data;
       const $ = cheerio.load(html); 
 
-      let casesArr = $('.goods_name').text().split("Case")
+      let casesArr = $('.goods_name').text().split((/(?=Corsair)|(?=CORSAIR)|(?=Deepcool)|(?=Fractal)|(?=Thermaltake)|(?=NZXT)|(?=MSI)|(?=AZZA)/g))
       //casesArr[' - '] = ""
 
       console.log(casesArr)
 
-      // casesArr.forEach(pcCase => {
-      //   const sql = `
-      //   INSERT INTO cases(name)
-      //   VALUES($1)
-      //   `
-      //   return db
-      //     .query(sql, [pcCase])
-      // })
+      casesArr.forEach(pcCase => {
+        const sql = `
+        INSERT INTO cases(name)
+        VALUES($1)
+        `
+        return db
+          .query(sql, [pcCase])
+      })
 }});

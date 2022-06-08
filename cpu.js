@@ -26,11 +26,8 @@ axios.get(url)
       const $ = cheerio.load(html); 
       let cpuArr = $('.goods_name').text().split(" CPU Processor")
       cpuArr.pop()
-      console.log(cpuArr)
       let cpuParsed = cpuArr.map(cpu => cpuParser(cpu))
       cpuParsed.splice(9, 1)//removing bad element
-      console.log(cpuParsed)
-
       cpuParsed.forEach(cpu => {
         const sql = `
         INSERT INTO cpus(name, type)

@@ -12,7 +12,7 @@ cardsArr = axios.get(url)
       const html = response.data;
       const $ = cheerio.load(html); 
 
-      cardsArr = $('.goods_name').text().split(" Graphics Card")
+      let cardsArr = $('.goods_name').text().split(" Graphics Card")
       cardsArr.pop()
 
       cardsArr.forEach(card => {
