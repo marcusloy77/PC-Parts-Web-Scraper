@@ -1,10 +1,11 @@
 const axios = require('axios')
 const cheerio = require('cheerio')
-const db = require('./db/db');
+const db = require('../db/db');
 
 let url = 'https://www.umart.com.au/pc-parts/computer-parts/memory-ram-108'
 
-for (let page =1; page <= 3; page++){
+function ram(pages) {
+for (let page =1; page <= pages; page++){
 axios.get(url)
   .then((res) => {
       if(res.status === 200) {
@@ -33,6 +34,7 @@ axios.get(url)
       }
     })
 }
+}
 function ramParser(ram) {
     if (ram.includes("DDR4")) {
         return [ram, "DDR4"]
@@ -44,3 +46,5 @@ function ramParser(ram) {
         return [ram, null]
     }
 }
+
+module.exports = ram

@@ -1,13 +1,13 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const db = require('./db/db');
+const db = require('../db/db');
 const alphabet = 'abcdefghijklmnopqrstuvwxyz'.toUpperCase()
 
 
   // const args = process.argv.slice(2);
   // const postCode = args[0] || 2000;
-  
-for (let page =1; page <= 3; page++){
+function ssds(pages) {
+for (let page =1; page <= pages; page++){
   let url = 'https://www.umart.com.au/pc-parts/storage-devices/ssd-hard-drives-580';
   axios.get(url)
     .then((response) => {
@@ -30,3 +30,5 @@ for (let page =1; page <= 3; page++){
         })
   }});
 }
+}
+module.exports = ssds

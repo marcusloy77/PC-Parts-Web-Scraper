@@ -1,21 +1,6 @@
 CREATE DATABASE pc_db;
 \c pc_db
 
-CREATE TABLE users(
-  id SERIAL PRIMARY KEY,
-  first_name TEXT,
-  last_name TEXT,
-  user_name TEXT,
-  email TEXT,
-  password_digest TEXT
-);
-
-CREATE TABLE pc_list(
-  id SERIAL PRIMARY KEY,
-  user_id INTEGER,
-  name TEXT
-);
-
 CREATE TABLE cpus(
   id SERIAL PRIMARY KEY,
   name TEXT,

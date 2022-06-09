@@ -1,6 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const db = require('./db/db');
+const db = require('../db/db');
 const alphabet = 'abcdefghijklmnopqrstuvwxyz'.toUpperCase()
 
   // const args = process.argv.slice(2);
@@ -27,7 +27,9 @@ function motherboardParser(motherboard) {
   }
   return motherboardOutput
 }
-for (let page =1; page <= 3; page++){
+
+function motherboards(pages) {
+for (let page =1; page <= pages; page++){
   let url = `https://www.umart.com.au/pc-parts/computer-parts/motherboards-104?page=${page}`;
   axios.get(url)
     .then((response) => {
@@ -54,5 +56,6 @@ for (let page =1; page <= 3; page++){
         })
   }});
 }
-
+}
+module.exports = motherboards
 //to get ram specifications - scrape link, go to each link, search for 'ddr' and output the number directly after it
