@@ -13,28 +13,31 @@ function cpuParser(cpu) {
     return [cpu, "AMD"]
   }
   else {
-    return [null, null]
+    return [cpu, null]
   }
 }
 
-let url = 'https://www.umart.com.au/pc-parts/computer-parts/cpu-processors-611';
+for (let page =1; page <= 3; page++){
+  let url = `https://www.umart.com.au/pc-parts/computer-parts/cpu-processors-611?page=${page}`;
 
-axios.get(url)
-  .then((response) => {
-      if(response.status === 200) {
-      const html = response.data;
-      const $ = cheerio.load(html); 
-      let cpuArr = $('.goods_name').text().split(" CPU Processor")
-      cpuArr.pop()
-      let cpuParsed = cpuArr.map(cpu => cpuParser(cpu))
-      cpuParsed.splice(9, 1)//removing bad element
-      cpuParsed.forEach(cpu => {
-        const sql = `
-        INSERT INTO cpus(name, type)
-        VALUES($1, $2)
-        `
-        return db
-          .query(sql, cpu)
-      })
-}});
+  axios.get(url)
+    .then((response) => {
+        if(response.status === 200) {
+        const html = response.data;
+        const $ = cheerio.load(html); 
+        let cpuArr = $('.goods_name').text().split((/(?=Intel)|(?=AMD)/g))
+        cpuArr.pop()
+        
 
+        let cpuParsed = cpuArr.filter(cpu => cpu.length < 40)
+        cpuParsed = cpuArr.map(cpu => cpuParser(cpu))
+        cpuParsed.forEach(cpu => {
+          const sql = `
+          INSERT INTO cpus(name, type)
+          VALUES($1, $2)
+          `
+          return db
+            .query(sql, cpu)
+        })
+  }});
+}
